@@ -71,6 +71,45 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Linux指令-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/" class="article-date">
+  <time class="dt-published" datetime="2026-07-18T05:28:10.000Z" itemprop="datePublished">2026-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/">Linux指令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>bash命令基本操作<br>（1）登录<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-1.png" alt="alt text"><br>（2）reboot重启openEuler<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-2.png" alt="alt text"><br>（3）logout退出登录<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-3.png" alt="alt text"><br>（4）exit退出用户登录<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-4.png" alt="alt text"><br>（5）pwd查看当前所在目录<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-5.png" alt="alt text"><br>（6）cd &#x2F; ls 进入系统根目录&#x2F;,列出所有一级目录<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-6.png" alt="alt text"><br>（7）cd ~ 和ls -a进入用户家目录，显示隐藏文件<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-7.png" alt="alt text"><br>（8）mkdir -p:在&#x2F;tmp下创建多级目录结构Linux&#x2F;pratice&#x2F;test<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-8.png" alt="alt text"><br>（9）touch:切换到test目录，新建空文件note.txt<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-9.png" alt="alt text"><br>（10）cp：复制note.txt到上级practice目录，重命名为bak.txt<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-10.png" alt="alt text"><br>（11）mv：移动bak.txt到&#x2F;tmp目录<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-11.png" alt="alt text"><br>（12）rm：递归删除整个Linux文件夹<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-12.png" alt="alt text"><br>（13）echo：向note.txt写入文本：openEuler Linux基础练习<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-13.png" alt="alt text"><br>（14）cat：完整查看文件内容<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-14.png" alt="alt text"><br>（15）less：分页查看<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-15.png" alt="alt text"><br>（16）find：在&#x2F;etc目录下查找所有后缀为.conf的文件<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-16.png" alt="alt text"><br>（17）grep：过滤&#x2F;etc&#x2F;passwd中包含root的行<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-17.png" alt="alt text"><br>（18）groupadd：创建用户组study（GID自定义1010）<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-18.png" alt="alt text"><br>（19）user01：创建用户user01，附属组加入study<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-19.png" alt="alt text"><br>（20）passwd：设置user01登录密码<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-20.png" alt="alt text"><br>（21）chown：将&#x2F;tmp&#x2F;note.txt所有者改为user01，所属组改为study<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-21.png" alt="alt text"><br>（22）chmod：设置文件权限：所有者读写，组可读，其他用户只读（644）<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-22.png" alt="alt text"><br>（23）lscpu和free -h:查看CPU核心、内存使用<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-23.png" alt="alt text"><br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-24.png" alt="alt text"><br>（24）ps aux |:查看当前运行进程，过滤bash进程<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-25.png" alt="alt text"><br>（25）top：实时监控系统资源<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-26.png" alt="alt text"><br>（26）tar -zcvf:将&#x2F;tmp下所有txt文件打包压缩成file.tar.gz<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-27.png" alt="alt text"><br>（27）tar -zxvf:解压<br><img src="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/image-28.png" alt="alt text"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/" data-id="cmrpxpml50000lcud2ub95i46" data-title="Linux指令" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Linux基础学习-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2026/07/16/Linux%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-1/" class="article-date">
@@ -100,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/07/16/Linux%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-1/" data-id="cmrn42om70000lwudgfjefzx0" data-title="Linux基础学习" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/07/16/Linux%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-1/" data-id="cmrpxpml70001lcud9cicgi1p" data-title="Linux基础学习" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -139,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/07/13/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" data-id="cmrn42om90002lwud6p6g90im" data-title="我的第一篇博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/07/13/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" data-id="cmrpxpmld0003lcudfwuaczwx" data-title="我的第一篇博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -190,7 +229,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/07/13/hello-world/" data-id="cmrn42om80001lwudhxj2grf5" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/07/13/hello-world/" data-id="cmrpxpml80002lcud84yjfj5f" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -231,6 +270,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/07/18/Linux%E6%8C%87%E4%BB%A4-1/">Linux指令</a>
+          </li>
         
           <li>
             <a href="/2026/07/16/Linux%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-1/">Linux基础学习</a>
