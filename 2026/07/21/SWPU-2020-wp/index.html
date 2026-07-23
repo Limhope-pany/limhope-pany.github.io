@@ -13,15 +13,15 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="套娃WP压缩包分析、文档隐写、RC4解码解题步骤：1.开启环境后有一个附件（套娃.xlsx），将后缀.xlsx改为.zip，解压得到两个文件·RC4data.txt（存放 RC4 密文U2FsdGVkX19uI2lzmxYrQ9mc16y7la7qc7VTS8gLaUKa49gzXPclxRXVsRJxWz&#x2F;p）·swpu.xlsx所以处理swpu.xlsx·什么是xlsx文件？xlsx">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/image-1.png">
-<meta property="og:image" content="http://example.com/image-2.png">
-<meta property="og:image" content="http://example.com/image-3.png">
-<meta property="og:image" content="http://example.com/image-4.png">
+<meta property="og:image" content="http://example.com/2026/07/21/SWPU-2020-wp/image-1.png">
+<meta property="og:image" content="http://example.com/2026/07/21/SWPU-2020-wp/image-2.png">
+<meta property="og:image" content="http://example.com/2026/07/21/SWPU-2020-wp/image-3.png">
+<meta property="og:image" content="http://example.com/2026/07/21/SWPU-2020-wp/image-4.png">
 <meta property="article:published_time" content="2026-07-21T12:19:18.000Z">
 <meta property="article:modified_time" content="2026-07-21T13:09:16.387Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/image-1.png">
+<meta name="twitter:image" content="http://example.com/2026/07/21/SWPU-2020-wp/image-1.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -100,12 +100,12 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>套娃WP<br>压缩包分析、文档隐写、RC4解码<br>解题步骤：<br>1.开启环境后有一个附件（套娃.xlsx），将后缀.xlsx改为.zip，解压得到两个文件<br><img src="/image-1.png" alt="alt text"><br>·RC4data.txt（存放 RC4 密文U2FsdGVkX19uI2lzmxYrQ9mc16y7la7qc7VTS8gLaUKa49gzXPclxRXVsRJxWz&#x2F;p）<br>·swpu.xlsx<br>所以处理swpu.xlsx<br>·什么是xlsx文件？<br>xlsx 是 Microsoft Excel 2007 及之后版本 默认的电子表格文件格式，全称 Office Open XML Spreadsheet。<br>（1）旧版 Excel（2003 及更早）后缀是 .xls；<br>（2）xlsx 是压缩包格式，底层本质是 ZIP 压缩包，内部存放 XML 描述文件、图片、嵌入附件、隐藏数据等<br>2.将swpu.xlsx后缀改为.zip，解压得到<br><img src="/image-2.png" alt="alt text"><br>·easyrc4.xlsx<br>·RC4key.zip（带密码，内部是存放密钥的RC4key.txt）<br>3.用010 Editor打开easyrc4.xlsx，导出为十六进制，搜索password<br><img src="/image-3.png" alt="alt text"><br>得到密码字符串：6e4c834d77cba03af41e1562a5bce84e<br>4.使用该密码解压RC4key.zip，打开RC4key.txt得到 RC4 密钥：ABCDEFGHIJKLMNOPQRSTUVWXYZ<br><img src="/image-4.png" alt="alt text"><br>·什么是RC4密钥？<br>RC4 是一种对称流加密算法：加密、解密用同一个密钥，加密和解密操作完全一样（异或可逆）。<br>明文 \oplus 密钥流 &#x3D; 密文<br>密文 \oplus 密钥流 &#x3D; 明文<br>所以 RC4加密 &#x3D; RC4解密，运算无区别。<br>·如何解密：<br>（1）使用RC4命令工具,把加密后的密文保存为cipher.bin，在bash中输入：<br>rc4 “ABCDEFGHIJKLMNOPQRSTUVWXYZ” cipher.bin &gt; plain.txt<br>打开plain.txt就是解密后的明文<br>（2）python脚本解密（最常用）<br>5.取出RC4data.txt内的密文，使用 RC4 解密工具（CyberChef），密钥填入ABCDEFGHIJKLMNOPQRSTUVWXYZ，解密得到：ef1a73d40977a49b99b871980f355757<br>6.flag为：NSSCTF{ef1a73d40977a49b99b871980f355757}</p>
+        <p>套娃WP<br>压缩包分析、文档隐写、RC4解码<br>解题步骤：<br>1.开启环境后有一个附件（套娃.xlsx），将后缀.xlsx改为.zip，解压得到两个文件<br><img src="/2026/07/21/SWPU-2020-wp/image-1.png" alt="alt text"><br>·RC4data.txt（存放 RC4 密文U2FsdGVkX19uI2lzmxYrQ9mc16y7la7qc7VTS8gLaUKa49gzXPclxRXVsRJxWz&#x2F;p）<br>·swpu.xlsx<br>所以处理swpu.xlsx<br>·什么是xlsx文件？<br>xlsx 是 Microsoft Excel 2007 及之后版本 默认的电子表格文件格式，全称 Office Open XML Spreadsheet。<br>（1）旧版 Excel（2003 及更早）后缀是 .xls；<br>（2）xlsx 是压缩包格式，底层本质是 ZIP 压缩包，内部存放 XML 描述文件、图片、嵌入附件、隐藏数据等<br>2.将swpu.xlsx后缀改为.zip，解压得到<br><img src="/2026/07/21/SWPU-2020-wp/image-2.png" alt="alt text"><br>·easyrc4.xlsx<br>·RC4key.zip（带密码，内部是存放密钥的RC4key.txt）<br>3.用010 Editor打开easyrc4.xlsx，导出为十六进制，搜索password<br><img src="/2026/07/21/SWPU-2020-wp/image-3.png" alt="alt text"><br>得到密码字符串：6e4c834d77cba03af41e1562a5bce84e<br>4.使用该密码解压RC4key.zip，打开RC4key.txt得到 RC4 密钥：ABCDEFGHIJKLMNOPQRSTUVWXYZ<br><img src="/2026/07/21/SWPU-2020-wp/image-4.png" alt="alt text"><br>·什么是RC4密钥？<br>RC4 是一种对称流加密算法：加密、解密用同一个密钥，加密和解密操作完全一样（异或可逆）。<br>明文 \oplus 密钥流 &#x3D; 密文<br>密文 \oplus 密钥流 &#x3D; 明文<br>所以 RC4加密 &#x3D; RC4解密，运算无区别。<br>·如何解密：<br>（1）使用RC4命令工具,把加密后的密文保存为cipher.bin，在bash中输入：<br>rc4 “ABCDEFGHIJKLMNOPQRSTUVWXYZ” cipher.bin &gt; plain.txt<br>打开plain.txt就是解密后的明文<br>（2）python脚本解密（最常用）<br>5.取出RC4data.txt内的密文，使用 RC4 解密工具（CyberChef），密钥填入ABCDEFGHIJKLMNOPQRSTUVWXYZ，解密得到：ef1a73d40977a49b99b871980f355757<br>6.flag为：NSSCTF{ef1a73d40977a49b99b871980f355757}</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/07/21/SWPU-2020-wp/" data-id="cmruofyiq0001dwud1pj60r62" data-title="SWPU 2020 wp" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/07/21/SWPU-2020-wp/" data-id="cmrx0ub440003ykudexi6bydn" data-title="SWPU 2020 wp" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
